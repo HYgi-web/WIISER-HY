@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IISERites OWN  Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        body {
+            background-image: url('images/bg.jpg');  /* Replace with your image path */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;}
+        content-wrapper {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                min-height: 100vh;}
+        @media screen and (max-width: 768px) {
+            body {
+                 /* Adjust background properties for mobile devices if needed */
+                 background-attachment: scroll;
+                }
+        }
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            color: #2196f3;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            float:left;
+        }
+        .nav-links a:hover {
+            color: #2196f3;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #000;
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover{
+            background-color: #2196f3;}
+
+        .btn-outline {
+            border: 1px solid #333;
+            background: none;
+        }
+        .btn-outline:hover{
+            color: #2196f3;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            padding: 4rem 2rem;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background-color: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: #20BEFF;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid #e9ecef;
+          }
+        
+          .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+          }
+        
+          .footer-section h3 {
+            color: #212529;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+          }
+        
+          .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+        
+          .footer-section ul li {
+            margin-bottom: 0.5rem;
+          }
+        
+          .footer-section ul li a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s ease;
+          }
+        
+          .footer-section ul li a:hover {
+            color: #2196f3;
+          }
+        
+          .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+          }
+        
+          .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+          }
+        
+          .social-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s ease;
+          }
+        
+          .social-links a:hover {
+            color: #0d6efd;
+          }
+          .fimg{
+            float: right;
+            margin: 3px;
+            
+            border-radius: 50%;
+            
+          }
+          .feature-card p{
+            text-align: justify;
+          }
+          .darkmode{
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #2d2d2d;
+          }
+        </style>
+        
+        
+    
+</head>
+<body>
+    <header class="header">
+        <div class="logo">WIISER</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="pyq.html">PYQ's</a>
+            <a href="assig.html">Assignments</a>
+            <a href="lab.html">Lab Work</a>
+            <a href="refer.html">References</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="team.html"><button class="btn btn-outline">Contact Us</button></a>
+            <a href="https://chat.whatsapp.com/LfTrZnIdKD8KfrW7go4Vbo"><button class="btn btn-primary">Join us </button></a>
+           
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>IISERites own Platform</h1>
+            <br>
+            <p> A place where all of you can access standard books,well written notes, Assignments, Previous year papers, Lab work and various reference links to increase your understanding .</p>
+            <div class="auth-buttons">
+                <button class="btn btn-primary">Register with Google</button>
+                <button class="btn btn-outline">Register with Email</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/charnew.svg" width="625px">
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Learners</h3>
+                <img src="images/home logo.png" class="fimg" width="90px">
+                <p>Take a deep dive into the notes, PYQ's, Assignments, and boost acadamically</p>
+                <br>
+                <ul class="feature-list">
+                    
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Developers</h3>
+                <p>An effort from our side to make the availablity of resources easy and in an innovative way. </p>
+                <br>
+            </div>
+            <div class="feature-card">
+                <h3>Take Help</h3>
+                <img src="images/chatgpt.png" width="80px" class="fimg">
+                <p>Click on button below to resolve doubts and queries</p>
+                <br>
+                <div class="auth-buttons">
+                
+                <a href="https://chatgpt.com"><button class="btn btn-primary"><h2>Open AI</h2></button></a>
+                
+                <!--<br>
+                <ul class="feature-list">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>-->
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <h2>Tackle your next semester with IISER Adda</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>5</h3>
+                <p>DATASETS</p>
+            </div>
+            <div class="stat-item">
+                <h3>0</h3>
+                <p>NOTEBOOKS</p>
+            </div>
+            <div class="stat-item">
+                <h3>4</h3>
+                <p>USERS</p>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>About</h3>
+            <ul>
+              <li><a href="about.html">About IISERites Platform</a></li>
+              <li><a href="team.html">Our Team</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Join Us</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+              <li><a href="notes.html">Notes</a></li>
+              <li><a href="pyq.html">PYQ's</a></li>
+              <li><a href="lab.html">Lab Work</a></li>
+              <li><a href="assig.html">Assignments</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Help & Support</h3>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Connect With Us</h3>
+            <ul>
+              <li><a href="#">Discord Community</a></li>
+              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdMNcwCzbSFqGQW6QpCoPMwDUpNbkEVbY6NkgaFrVm_fSCGHA/viewform?usp=sharing">Feedback</a></li>
+              <li><a href="#">Report an Issue</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-insta"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 IISERites OWN Platform. All rights reserved.</p>
+        </div>
+      </footer>
+
+</body>
+</html>
+</body>
+</html>
