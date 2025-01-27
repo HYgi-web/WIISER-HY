@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sem1pyqchem</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f5;
+    }
+    body {
+        background-image: url('../../images/bg.jpg');  /* Replace with your image path */
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 100vh;}
+    content-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            min-height: 100vh;}
+    @media screen and (max-width: 768px) {
+        body {
+             /* Adjust background properties for mobile devices if needed */
+             background-attachment: scroll;
+            }
+    }
+    .navbar {
+        background: none;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        color: #2196f3;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .nav-buttons {
+        display: flex;
+        gap: 1rem;
+    } 
+    .nav-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .btn-outline {
+        border: 1px solid #333;
+        color: #333;
+    }
+
+    .btn-filled {
+        background-color: #000;
+        color: white;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    .pyq-select {
+        width: 100%;
+        max-width: 400px;
+        margin: 2rem auto;
+        display: block;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .pyq-container {
+        margin-top: 2rem;
+    }
+
+    .pyq-content {
+        display: none;
+    }
+
+    .pyq-content.active {
+        display: block;
+    }
+   
+
+    .notes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .notes-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .notes-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .notes-card h3 {
+        color: #1976d2;
+        margin-bottom: 1rem;
+    }
+
+    .notes-card p {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .view-notes-btn {
+        display: inline-block;
+        padding: 0.6rem 1.2rem;
+        background-color: #2196f3;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+    }
+    .view-notes-btn:hover {
+        background-color: #1976d2;
+    }
+    .btn-outline:hover{
+        color:#2196f3;
+    }
+    .btn-filled:hover {
+        background-color: #500ee9;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+        display: flex;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+    
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 24px;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #4a5568;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .back-link:hover {
+        background-color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .back-link svg {
+        width: 16px;
+        height: 16px;
+    }
+    .back-button {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 10px 20px;
+        color: #666;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #f5f5f5;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+        display: flex;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+</style>
+<body>
+    <nav class="navbar">
+        <a href="../../index.html" class="logo">IISER Adda</a>
+        <h2><p> SEMESTER 1 CHEMISTRY PYQ</p></h2>
+        <div class="nav-buttons">
+            <a href="#" class="btn btn-outline">Contact Us</a>
+            <a href="#" class="btn btn-filled">Join Us</a>
+        </div>
+    </nav>
+    <select class="pyq-select" id="pyqSelect" onchange="showSubjects()">
+        <option value="">Select Examination</option>
+        <option value="midsem">Midsem</option>
+        <option value="endsem">Endsem</option>
+        <option value="quiz">Quiz</option>
+       
+    </select>
+    <div class="pyq-container">
+        <div id="midsem" class="pyq-content">
+            <div class="notes-grid">
+                <div class="notes-card">
+                    <h3>2024 Midsem</h3>
+                    <p>Introduction to Mechanics and Thermodynamics</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2023 Midsem</h3>
+                    <p>Basic Concepts in Organic Chemistry</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2022 Midsem</h3>
+                    <p>Calculus and Linear Algebra</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2019 Midsem</h3>
+                    <p>Cell Biology and Genetics</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2018 Midsem</h3>
+                    <p>Introduction to Earth Systems</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2017 Midsem</h3>
+                    <p>Programming Fundamentals</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+            </div>
+        </div>
+        <div id="endsem" class="pyq-content">
+            <div class="notes-grid">
+                <div class="notes-card">
+                    <h3>2024 Endsem</h3>
+                    <p>Introduction to Mechanics and Thermodynamics</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2023 Endsem</h3>
+                    <p>Basic Concepts in Organic Chemistry</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2022 Endsem</h3>
+                    <p>Calculus and Linear Algebra</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2019 Endsem</h3>
+                    <p>Cell Biology and Genetics</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2018 Endsem</h3>
+                    <p>Introduction to Earth Systems</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2017 Endsem</h3>
+                    <p>Programming Fundamentals</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+            </div>
+        </div>
+        <div id="quiz" class="pyq-content">
+            <div class="notes-grid">
+                <div class="notes-card">
+                    <h3>2024 Quiz</h3>
+                    <p>Introduction to Mechanics and Thermodynamics</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2023 Quiz</h3>
+                    <p>Basic Concepts in Organic Chemistry</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2022 Quiz</h3>
+                    <p>Calculus and Linear Algebra</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2019 Quiz</h3>
+                    <p>Cell Biology and Genetics</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                    </div>
+                <div class="notes-card">
+                    <h3>2018 Quiz</h3>
+                    <p>Introduction to Earth Systems</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+                <div class="notes-card">
+                    <h3>2017 Quiz</h3>
+                    <p>Programming Fundamentals</p>
+                    <a href="#" class="view-notes-btn">View Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer back-button">
+        <button class="back-button" onclick="goBack()">← Back</button>
+    </footer>
+    
+    <script>
+        function showSubjects() {
+            const select = document.getElementById('pyqSelect');
+            const allContent = document.querySelectorAll('.pyq-content');
+            
+            // Hide all semester content
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected semester content
+            if (select.value) {
+                const selectedContent = document.getElementById(select.value);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                }
+            }
+        }
+        function goBack() {
+            window.history.back();
+          }
+    </script>
+</body>
+</html>    
+        
+    

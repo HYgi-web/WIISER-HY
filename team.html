@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color:#ffffff ;
+            color: #2d2d2d;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            margin-bottom: 4rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #2d2d2d;
+        }
+
+        .member-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-title {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+        }
+
+        .member-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #2d2d2d;
+            margin: 3rem 0;
+        }
+
+        .team-footer {
+            font-size: 1.2rem;
+            max-width: 800px;
+            
+            text-align: left;
+            padding: 2rem 0;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+            display: flex;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #4a5568;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .back-link:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .sm_ig{
+            padding: 5px;
+            border-radius: 8px;
+            color: rgb(230, 114, 234);
+            background-color: rgb(193, 197, 197);
+            text-decoration: none;
+        }
+        .sm_ld{
+            padding: 5px;
+            border-radius: 8px;
+            color: rgb(46, 86, 218);
+            background-color: rgb(193, 197, 197);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="team-member">
+            <div class="profile-header">
+                <img src="images/photo.jpg" alt="Ananya Jain" class="profile-image">
+                <div class="member-info">
+                    <h1>Ananya Jain</h1>
+                    <div class="member-title">Student | IISER Pune</div>
+                    <div class="sm">
+                        <a href="https://www.linkedin.com/in/ananya-jain-5b7ba7318/" target="_blank" rel="noopener noreferrer" class="sm_ld"><i class="fa fa-linkedin fa-lg sm_ld"></i>LinkedIn</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="https://www.instagram.com/ananyaa_jn/" target="_blank" rel="noopener noreferrer" class="sm_ig"><i class="fa fa-instagram fa-lg sm_ig"></i>Instagram</a>
+                    </div>
+                </div>
+                
+            </div>
+            <p class="member-description">
+                Currently pursuing studies at the Indian Institute of Science Education and Research (IISER), Pune, I bring firsthand academic insights to the platform. My experience as a student has guided the curation of high-quality study materials, ensuring the content is relevant, comprehensive, and beneficial for my fellow peers.
+            </p>
+        </div>
+
+        <div class="divider"></div>
+        <div class="team-member">
+            <div class="profile-header">
+                <img src="images/photo new.jpg" alt="Harsh Yadav" class="profile-image">
+                <div class="member-info">
+                    <h1>Harsh Yadav</h1>
+                    <div class="member-title">Engineer | DTU, Delhi</div>
+                    <div class="sm">
+                        <a href="https://www.linkedin.com/in/harsh-yadav-b3a7a8318/" target="_blank" rel="noopener noreferrer" class="sm_ld"><i class="fa fa-linkedin fa-lg sm_ld"></i>LinkedIn</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="https://www.instagram.com/harshyadav.1/" target="_blank" rel="noopener noreferrer" class="sm_ig"><i class="fa fa-instagram fa-lg sm_ig"></i>Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <p class="member-description">
+                As an engineering student from Delhi Technological University (DTU), I am passionate about leveraging technology to create accessible and effective educational resources. My technical expertise has been instrumental in developing the core architecture of this website, ensuring a seamless user experience for IISER Pune students.
+            </p>
+        </div>
+
+        <div class="divider"></div>
+
+        
+
+        <div class="team-footer">
+            Together, we aim to empower IISER Pune students with top-notch educational content, making learning more effective and engaging. Our collaboration combines technical innovation with academic expertise to create a platform you can trust.
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <footer class="footer">
+        <a href="index.html" class="back-link" >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+    </footer>
+</body>
+</html>
