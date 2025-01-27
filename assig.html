@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IISER Adda - Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+        body {
+            background-image: url('images/bg.jpg');  /* Replace with your image path */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;}
+        content-wrapper {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                min-height: 100vh;}
+        @media screen and (max-width: 768px) {
+            body {
+                 /* Adjust background properties for mobile devices if needed */
+                 background-attachment: scroll;
+                }
+        }
+
+
+        .navbar {
+            background: none;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #2196f3;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2196f3;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.65rem;
+        }
+
+        .btn-outline {
+            border: 1px solid #333;
+            color: #333;
+        }
+
+        .btn-filled {
+            background-color: #000;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .semester-select {
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            display: block;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .subjects-container {
+            margin-top: 2rem;
+        }
+
+        .semester-content {
+            display: none;
+        }
+
+        .semester-content.active {
+            display: block;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .subject-card h3 {
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+
+        .subject-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .view-notes-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #2196f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .view-notes-btn:hover {
+            background-color: #1976d2;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">WIISER</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="pyq.html">PYQ's</a>
+            <a href="assig.html">Assignments</a>
+            <a href="lab.html">Lab Work</a>
+            <a href="refer.html">References</a>
+        </div>
+        <div class="nav-buttons">
+            <a href="#" class="btn btn-outline">Contact Us</a>
+            <a href="#" class="btn btn-filled">Join us</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Assignments</h1>
+            <p>Access Assignments for all semesters and subjects</p>
+        </div>
+
+        <select class="semester-select" id="semesterSelect" onchange="showSubjects()">
+            <option value="">Select Semester</option>
+            <option value="sem1">Semester 1</option>
+            <option value="sem2">Semester 2</option>
+            <option value="sem3">Semester 3</option>
+            <option value="sem4">Semester 4</option>
+            <option value="sem5">Semester 5</option>
+            <option value="sem6">Semester 6</option>
+            <option value="sem7">Semester 7</option>
+            <option value="sem8">Semester 8</option>
+            <option value="sem9">Semester 9</option>
+            <option value="sem10">Semester 10</option>
+        </select>
+
+        <div class="subjects-container">
+            <div id="sem1" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem2" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics yadavji</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem3" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem4" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>  
+            <div id="sem5" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem6" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem7" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem8" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem9" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div id="sem10" class="semester-content">
+                <div class="subjects-grid">
+                    <div class="subject-card">
+                        <h3>Physics I</h3>
+                        <p>Introduction to Mechanics and Thermodynamics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Chemistry I</h3>
+                        <p>Basic Concepts in Organic Chemistry</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Mathematics I</h3>
+                        <p>Calculus and Linear Algebra</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Biology I</h3>
+                        <p>Cell Biology and Genetics</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Earth Sciences I</h3>
+                        <p>Introduction to Earth Systems</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                    <div class="subject-card">
+                        <h3>Computer Science I</h3>
+                        <p>Programming Fundamentals</p>
+                        <a href="#" class="view-notes-btn">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSubjects() {
+            const select = document.getElementById('semesterSelect');
+            const allContent = document.querySelectorAll('.semester-content');
+            
+            // Hide all semester content
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected semester content
+            if (select.value) {
+                const selectedContent = document.getElementById(select.value);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
